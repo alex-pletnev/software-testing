@@ -13,11 +13,15 @@ public class Ln implements MathFunction {
             throw new ArithmeticException("x must be greater than 0");
         }
 
-        if (x == 1.0) {
+        if ((x >= 1.0 - (precision * 10.0)) && (x <= 1.0 + (precision * 10.0))) {
             return 0.0;
         }
 
-        boolean invert = x >= 2;
+        if (x < precision) {
+            return 1 / precision;
+        }
+
+        boolean invert = x >= 2 - precision ;
         if (invert) {
             x = 1.0 / x;
         }

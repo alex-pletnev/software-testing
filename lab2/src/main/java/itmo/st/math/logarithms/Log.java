@@ -36,6 +36,13 @@ public class Log implements MathFunction {
 
     @Override
     public Double apply(Double x, Double precision) {
+        if ((x >= 1.0 - (precision * 10.0)) && (x <= 1.0 + (precision * 10.0))) {
+            return 0.0;
+        }
+
+        if ((base >= (x + precision * 10.0)) && (base <= (x + precision * 10.0))) {
+            return 1.0;
+        }
         if (base == Math.E) return ln.apply(x, precision);
         return ln.apply(x, precision) / ln.apply(base, precision);
     }

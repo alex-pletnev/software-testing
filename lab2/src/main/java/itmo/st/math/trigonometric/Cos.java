@@ -1,9 +1,9 @@
 package itmo.st.math.trigonometric;
 
 import itmo.st.math.MathFunction;
+import itmo.st.math.util.Convectors;
 
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
+import static java.lang.Math.*;
 
 public class Cos implements MathFunction {
 
@@ -22,6 +22,8 @@ public class Cos implements MathFunction {
 
     @Override
     public Double apply(Double x, Double precision) {
-        return sqrt(1 - pow(sin.apply(x, precision), 2));
+        var cos = sqrt(max(1 - pow(sin.apply(x, precision * precision), 2), 0));
+        Double convX = Convectors.convArgForSin(x);
+        return (convX > -PI / 2 && convX < PI / 2) ? cos : -cos;
     }
 }
